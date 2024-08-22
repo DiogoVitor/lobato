@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Piadas.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<PiadasdbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("PiadasdbContext") ?? throw new InvalidOperationException("Connection string 'PiadasdbContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
